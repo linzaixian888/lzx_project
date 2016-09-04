@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>更新日志</title>
+</head>
+<style>
+#list{
+    list-style:none;
+}
+</style>
+<body>
+<ul id="list">
+	<li>
+		<h3>v4(2016-02-05)</h3>
+		<ol>
+			<li>增加站位调整功能</li>
+			<li>更新日志按钮的调整</li>
+			<li>增加，修改，删除，站位功能按钮设为不显示开放</li>
+		</ol>
+	</li>
+	<li>
+		<h3>v3(2016-02-04)</h3>
+		<ol>
+			<li>修复阵容查询有时查找不出的bug</li>
+			<li>修复某些情况下页面显示错乱的问题</li>
+			<li>增加功能完成</li>
+			<li>删除功能完成</li>
+		</ol>
+	</li>
+	<li>
+		<h3>v2(2016-02-03)</h3>
+		<ol>
+			<li>页面显示功能完成</li>
+			<li>阵容查询功能完成</li>
+		</ol>
+	</li>
+	<li>
+		<h3>v1(2016-02-02)</h3>
+		<ol>
+			<li>系统建立</li>
+			<li>数据库建立</li>
+		</ol>
+	</li>
+</ul>
+</body>
+</html>

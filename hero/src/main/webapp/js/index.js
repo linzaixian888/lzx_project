@@ -1,0 +1,1 @@
+//<script type="text/javascript" src="/hero/js/index.js"></script>
