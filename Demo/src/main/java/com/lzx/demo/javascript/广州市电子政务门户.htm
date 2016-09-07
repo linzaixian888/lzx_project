@@ -1,0 +1,245 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!-- saved from url=(0037)http://10.14.0.250/docexchangesystem/ -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><HTML 
+xmlns="http://www.w3.org/1999/xhtml"><HEAD>
+<META content="text/html; charset=utf-8" 
+http-equiv="Content-Type"><TITLE>广州市电子政务门户</TITLE><LINK rel="stylesheet" type="text/css" 
+href="广州市电子政务门户_files/portal.css">
+<SCRIPT type="text/javascript" src="广州市电子政务门户_files/common.js"></SCRIPT>
+
+<SCRIPT type="text/javascript" src="广州市电子政务门户_files/Barrett.js"></SCRIPT>
+
+<SCRIPT type="text/javascript" src="广州市电子政务门户_files/BigInt.js"></SCRIPT>
+
+<SCRIPT type="text/javascript" src="广州市电子政务门户_files/RSA.js"></SCRIPT>
+
+<META name="GENERATOR" content="MSHTML 9.00.8112.16476"></HEAD>
+<BODY onload="init();">
+<DIV id="conbg">
+<DIV id="leftad">
+<TABLE border="0" cellSpacing="0" cellPadding="0" width="100%">
+  <TBODY>
+  <TR>
+    <TD height="8"></TD></TR>
+  <TR>
+    <TD>
+      <P style="font-size: 14px;" id="noticeDiv"></P></TD></TR>
+  <TR>
+    <TD height="35"></TD></TR>
+  <TR>
+    <TD>
+      <P style="font-size: 14px;" 
+id="resourceDiv"></P></TD></TR></TBODY></TABLE></DIV>
+<DIV id="midinput">
+<FORM method="post" 
+action="/docexchangesystem/loginAction.do?method=login"><INPUT id="preUrl" name="preUrl" 
+value="http://10.14.0.250:80/docexchangesystem/welcome.jsp" type="hidden">
+<TABLE border="0" cellSpacing="2" cellPadding="0" width="100%">
+  <TBODY>
+  <TR>
+    <TD width="26%">用户名:							</TD>
+    <TD width="74%"><INPUT onblur="checkLogin();" onpropertychange="checkLogin();" 
+      id="loginName" class="iptbold" name="loginName_auto" type="text"></TD></TR>
+  <TR>
+    <TD>密&nbsp;&nbsp;码:							</TD>
+    <TD><INPUT onblur="checkLogin();" onpropertychange="checkLogin();" id="loginPass" 
+      class="iptbold" name="loginPasssd_auto" type="password"></TD></TR>
+  <TR>
+    <TD>&nbsp;</TD>
+    <TD style="font-size: 16px;" height="35" vAlign="bottom"><A style="display: none;" 
+      href="http://10.14.0.250/docexchangesystem/adminlogin.jsp"><IMG src="广州市电子政务门户_files/jkfw_icon.gif" 
+      width="28" height="27">管理员由此登录</A></TD>
+    <TD></TD>
+  <TR style="display: none;" id="ShowErro">
+    <TD id="checkInfo" colSpan="2"><FONT 
+color="red"></FONT></TD></TR></TBODY></TABLE></FORM></DIV>
+<DIV id="rightbtn">
+<TABLE id="btnTable" border="0" cellSpacing="2" cellPadding="0" width="100%">
+  <TBODY>
+  <TR>
+    <TD style='font: 12px/20px "宋体"; color: rgb(102, 102, 102); font-size-adjust: none; font-stretch: normal;'><IMG 
+      src="广州市电子政务门户_files/spinner.gif">数据正在加载中...
+						</TD></TR></TBODY></TABLE></DIV>
+<DIV id="foot">
+<P>© 2009 广州市人民政府办公厅 &amp; 广州智能科技发展有限公司  版权所有				</P></DIV></DIV>
+<SCRIPT type="text/javascript" src="广州市电子政务门户_files/CommonScript.js"></SCRIPT>
+
+<SCRIPT type="text/javascript" src="广州市电子政务门户_files/engine.js"></SCRIPT>
+
+<SCRIPT type="text/javascript" src="广州市电子政务门户_files/util.js"></SCRIPT>
+
+<SCRIPT type="text/javascript">
+		function init(){
+		 
+			if(window != window.top){
+				window.top.location = window.location;
+			}
+			getLoginButton();
+			getNotice();
+			getResource();
+			var obj = document.getElementById("checkInfo");
+			
+			if('' !=""){
+			        obj.innerHTML = "<font color='red'></font>";
+			        document.getElementById("ShowErro").style.display="";
+					
+			}
+			document.getElementById("loginName").focus();
+		}
+		//得到登录按钮
+		function getLoginButton(){
+			//CommonScript.getLoginButton(showButton);
+			CommonScript.getLoginButtonFromDatabase(showButton);
+		}
+		//显示按钮
+		function showButton(items){
+			var table = document.getElementById("btnTable");
+			for(var i=0;i<table.rows.length;i++){
+				table.deleteRow(i);
+			}
+			for(var i=0;i<items.length;i++){
+				var row;
+				if(i%2 == 0){
+					row = table.insertRow(table.rows.length);
+				}else{
+					row = table.rows[table.rows.length -1];
+				}
+				var cell = row.insertCell(i%2);
+				//cell.innerHTML = '<img style="cursor:hand;" src="/docexchangesystem/' + items[i].loginImage + '" width="103" height="47" onclick="login(\'' + items[i].loginUrl + '\');"/>';
+				cell.innerHTML = '<img style="cursor:hand;" src="/docexchangesystem/loginAction.do?method=showImage&id=' + items[i].loginFormId 
+						+ '" width="103" height="47" onclick="login(\'' 
+						+ items[i].loginFormAction + '\',\'' 
+                         //                       + '/docexchangesystem/loginAction.do?method=login\',\'' 
+						+ items[i].loginFormMethod + '\',\'' 
+						+ items[i].loginFormName + '\',\'' 
+						+ items[i].loginFormUsername + '\',\'' 
+						+ items[i].loginFormPassword + '\');"/>';
+			}
+		}
+	
+		//异步得到最近公告
+		function getNotice(){
+			CommonScript.getPublicNotice(showNotice);
+		}
+		//显示公告
+		function showNotice(items){
+			var showNumber = 4;//最多显示公告的条数
+			var count = items.length;
+			if(items.length > showNumber){
+				count = showNumber;
+			}
+			var divObj = document.getElementById("noticeDiv");
+			var html = "";
+			for(var i=0;i<count;i++){
+				if(i==0){
+					html += '&gt;<a style="color:red;" href="/docexchangesystem/commonManageAction.do?method=showNotice&id=' + items[i].noticeId + '" title="' + items[i].noticeTitle + '" target="_blank">' + (i+1) + '.' + getString(items[i].noticeTitle,12) + '</a><br />\n';
+				}else{
+					html += '&gt;<a style="" href="/docexchangesystem/commonManageAction.do?method=showNotice&id=' + items[i].noticeId + '" title="' + items[i].noticeTitle + '" target="_blank">' + (i+1) + '.' + getString(items[i].noticeTitle,12) + '</a><br />\n';
+				}
+			}
+			for(var j=0;j<showNumber-count;j++){
+				html += "<br />";
+			}
+			//alert(html);
+			divObj.innerHTML = html;
+		}
+		
+		//异步得到下载资源
+		function getResource(){
+			CommonScript.getResource(showResource);
+		}
+		//显示资源
+		function showResource(items){
+			var showNumber = 6;//最多显示公告的条数
+			var divObj = document.getElementById("resourceDiv");
+			var html = "";
+			var count = 0;
+			if(items != null && items.length > 0){
+				count = items.length;
+				if(items.length > showNumber){
+					count = showNumber;
+				}
+				for(var i=0;i<count;i++){
+					html += "&gt;<a href='/docexchangesystem/commonManageAction.do?method=downloadRecource&id=" + items[i].resourceId + "' title='" + items[i].resourceName + "'>"+ getString(items[i].resourceName,12) + "</a><br />\n";
+				}
+			}
+			for(var j=0;j<showNumber-count;j++){
+				html += "<br />";
+			}
+			//alert(html);
+			divObj.innerHTML = html;
+		}
+		//验证用户名密码
+		function checkLogin(){
+			var name = document.getElementById("loginName");
+			var pass = document.getElementById("loginPass");
+			var obj = document.getElementById("checkInfo");
+			
+			if(name.value.replace(/\s/g,"").length == 0){
+					obj.innerHTML = "<font color='red'>请输入登录用户名</font>";
+					return;
+			}else if(pass.value.replace(/\s/g,"").length == 0){
+					obj.innerHTML = "<font color='red'>请输入登录密码</font>";
+					return;
+			}else{
+				obj.innerHTML = "";
+			}
+			
+			//CommonScript.ckeckPassWord(name.value,pass.value,'',showInfo);
+		}
+		function showInfo(result){
+			var obj = document.getElementById("checkInfo");
+			if(result == "false"){
+				obj.innerHTML = "<font color='red'>您输入的用户名或密码不正确</font>";
+			}else{
+				obj.innerHTML = "";
+			}
+		}
+		//登录
+		function login(loginFormAction,loginFormMethod,loginFormName,loginFormUsername,loginFormPassword){
+			//alert(loginFormAction);
+			//alert(loginFormMethod);
+			//alert(loginFormName);
+			//alert(loginFormUsername);
+			//alert(loginFormPassword);
+			
+			var userName = document.getElementById("loginName");
+			if(userName.value.replace(/\s/g,"").length == 0){
+				alert("登录名不允许为空，请输入登录用户名!");
+				userName.focus();
+				return;
+			}
+			userName.name = loginFormUsername;
+			
+			var userPass = document.getElementById("loginPass");
+			if(userPass.value.replace(/\s/g,"").length == 0){
+				alert("密码不允许为空，请输入登录密码!");
+				userPass.focus();
+				return;
+			}
+			
+			userPass.name = loginFormPassword;
+			
+			setMaxDigits(130);
+            var key = new RSAKeyPair("010001","","00808cddc98aa9be2562e617b31b4ba00f425e42a28b03f7924bf730abd8f292d8ab8ab7d6f94ec34b2d767aebba6821bf6cd131a3fc35f7700cf94fc65523937bc2eec705720dfd7bf3fe957d13d04eab1a46945647b96a0248c1c07327dd4254a817398e410ebb0a9213253288a9a639d42858fd4c8be7048cee60ce98fc1261");
+            var result = encryptedString(key, userPass.value);
+            //document.write(result);
+            userPass.value = result;
+			
+			var form = document.forms[0];
+			form.name = loginFormName;
+			if(loginFormMethod == "1"){
+				form.action = loginFormAction;
+				form.method = "post";
+				form.submit();
+			}else if(loginFormMethod == "0"){
+				var url = loginFormAction + "&preUrl=http://10.14.0.250:80/docexchangesystem/welcome.jsp&" + loginFormUsername + "=" + userName.value 
+						+ "&" + loginFormPassword + "=" + userPass.value;
+				window.location = url;
+			}
+		}
+	</SCRIPT>
+<!--object style="display:none" id="dll" classid="clsid:FBCA4BAF-04FB-4924-B209-E8987D9BAB91"
+		codebase="downLoadedFiles//stampclient.cab#version=-1,-1,-1,-1"-->
+<OBJECT style="display: none;" id="dll" codeBase="downLoadedFiles//stampclient.cab#version=1,0,2,2" 
+classid="clsid:7CB1B0EC-DE10-414E-A1F6-36C92B61D816"></OBJECT></BODY></HTML>

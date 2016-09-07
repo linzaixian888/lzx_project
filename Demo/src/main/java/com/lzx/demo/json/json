@@ -1,0 +1,12 @@
+{
+    "__module__": "bean.ConfContentBean",
+    "__class__": "ConfContentBean",
+    "contents": [
+        {
+            "key": "/home/bd/test/testdata",
+            "__module__": "bean.KeyValueBean",
+            "__class__": "KeyValueBean",
+            "value": "test test test test\ntest test test test\ntest test test test\n"
+        }
+    ]
+}
